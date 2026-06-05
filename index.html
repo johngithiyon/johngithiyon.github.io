@@ -96,10 +96,10 @@
         .hero {
             min-height: 100vh; display: flex; align-items: center;
             justify-content: center; position: relative; 
-            padding: 8rem 5% 4rem; /* Increased top padding from 6rem to 8rem */
+            padding: 8rem 5% 4rem; 
         }
         
-        /* Floating symbols */
+        /* Floating symbols - Kept only { }, [ ], </> */
         .floating-element {
             position: absolute; font-size: 2rem; opacity: 0.15;
             animation: float 6s ease-in-out infinite;
@@ -109,8 +109,6 @@
         .float-1 { top: 20%; left: 10%; animation-delay: 0s; color: var(--primary); }
         .float-2 { top: 60%; right: 15%; animation-delay: 2s; color: var(--secondary); }
         .float-3 { bottom: 20%; left: 20%; animation-delay: 4s; color: var(--accent); }
-        .float-4 { top: 30%; right: 10%; animation-delay: 1s; color: var(--gold); }
-        .float-5 { bottom: 30%; right: 25%; animation-delay: 3s; color: var(--primary); }
         @keyframes float {
             0%,100% { transform: translateY(0) rotate(0deg) scale(1); }
             25% { transform: translateY(-30px) rotate(5deg) scale(1.1); }
@@ -120,32 +118,27 @@
 
         .hero-content { 
             text-align: center; 
-            display: flex; flex-direction: column; align-items: center; /* Ensures perfect centering */
+            display: flex; flex-direction: column; align-items: center;
         }
         
-        /* Profile Image - Added margin-top to push away from header */
+        /* Profile Image - Single Color Border */
         .profile-img-container {
             width: 160px; height: 160px;
-            margin-top: 3rem; /* Added space between nav and image */
+            margin-top: 3rem; 
             margin-bottom: 2rem; position: relative;
             border-radius: 50%; padding: 4px;
-            background: linear-gradient(135deg, var(--primary), var(--accent), var(--gold), var(--primary));
-            background-size: 300% 300%;
-            animation: rotateBorder 4s linear infinite;
-            box-shadow: 0 0 30px rgba(14,165,233,0.4);
+            background: var(--primary);
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.5);
             transition: box-shadow 0.4s ease;
         }
         .profile-img-container:hover {
-            box-shadow: 0 0 60px rgba(14,165,233,0.8);
-        }
-        @keyframes rotateBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            box-shadow: 0 0 50px rgba(14, 165, 233, 0.8);
         }
         .profile-img {
             width: 100%; height: 100%; border-radius: 50%; 
-            object-fit: cover; border: 4px solid #020617; display: block;
+            object-fit: cover;
+            object-position: center 15%; /* Adjusts image to center face/upper body perfectly */
+            border: 4px solid #020617; display: block;
         }
 
         .hero-title {
@@ -188,6 +181,7 @@
             font-size: 0.9rem; font-weight: 700; text-decoration: none;
             border: none; cursor: pointer; position: relative;
             overflow: hidden; transition: all 0.3s ease; letter-spacing: 1px;
+            text-align: center;
         }
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -255,10 +249,7 @@
             transition: border-color 0.3s ease; 
             backdrop-filter: blur(10px); position: relative; overflow: hidden;
         }
-        /* Hover modified: NO MOVEMENT, NO COLOR CHANGE */
-        .skill-row:hover {
-            border-color: var(--accent);
-        }
+        .skill-row:hover { border-color: var(--accent); }
         .skill-row-header { display: flex; align-items: center; gap: 1rem; position: relative; z-index: 1; }
         .skill-icon { font-size: 1.5rem; filter: drop-shadow(0 0 5px rgba(14,165,233,0.5)); }
         .skill-name { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--primary); }
@@ -274,7 +265,8 @@
         .timeline::before {
             content: ''; position: absolute; left: 0; top: 0;
             width: 2px; height: 100%;
-            background: linear-gradient(180deg, var(--primary), var(--accent), var(--gold), transparent);
+            background: var(--primary); 
+            box-shadow: 0 0 8px rgba(14, 165, 233, 0.4); 
         }
         .timeline-item { position: relative; margin-bottom: 3rem; }
         .timeline-item::before {
@@ -294,7 +286,7 @@
         .timeline-company { font-size: 1rem; color: var(--text); margin-bottom: 0.75rem; font-weight: 600; }
         .timeline-desc { font-size: 0.95rem; line-height: 1.7; color: var(--text-dim); }
 
-        /* Projects Vertical - No Numbers, No Hover Animation */
+        /* Projects Vertical */
         .projects-container { display: flex; flex-direction: column; gap: 2rem; }
         .project-card {
             background: var(--bg-card); padding: 2rem;
@@ -303,23 +295,15 @@
             backdrop-filter: blur(10px); border-left: 4px solid var(--primary);
             display: flex; flex-direction: column; gap: 1.5rem;
         }
-        /* Hover modified: NO MOVEMENT, NO COLOR CHANGE */
-        .project-card:hover {
-            border-color: var(--accent);
-        }
+        .project-card:hover { border-color: var(--accent); }
 
         .project-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
-        .project-title {
-            font-family: 'Syne', sans-serif; font-size: 1.5rem;
-            font-weight: 700; color: var(--primary);
-        }
-        
+        .project-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
         .project-badge {
             padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: 700;
             letter-spacing: 1.5px; border: 1px solid var(--gold); color: var(--gold);
             background: rgba(245,158,11,0.1); white-space: nowrap; flex-shrink: 0;
         }
-        
         .project-description { font-size: 0.95rem; line-height: 1.7; color: var(--text-dim); }
         .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
         .tech-tag {
@@ -329,20 +313,20 @@
             color: var(--primary); font-weight: 700; letter-spacing: 0.5px;
         }
 
-        /* Education & Achievements */
-        .edu-ach-grid { display: flex; flex-direction: column; gap: 2rem; }
+        /* Education & Achievements - Grid Cards */
+        .edu-ach-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* Side-by-side cards */
+            gap: 2rem; 
+        }
         .edu-card {
             background: var(--bg-card); padding: 2rem;
             border: 1px solid var(--border); border-left: 4px solid var(--primary);
             backdrop-filter: blur(10px); transition: border-color 0.3s ease;
+            display: flex; flex-direction: column;
         }
-        /* Hover modified: NO MOVEMENT, NO COLOR CHANGE */
         .edu-card:hover { border-color: var(--accent); }
-        
-        .edu-title {
-            font-family: 'Syne', sans-serif; font-size: 1.2rem;
-            font-weight: 700; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
-        }
+        .edu-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
         .edu-detail { font-size: 0.95rem; line-height: 1.8; color: var(--text-dim); }
         .edu-detail strong { color: var(--text); }
 
@@ -383,69 +367,28 @@
             transition: left 0.3s; z-index: -1;
         }
         .contact-link:hover::before { left: 0; }
-        .contact-link:hover {
-            color: white; border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(14,165,233,0.4);
-        }
+        .contact-link:hover { color: white; border-color: var(--primary); box-shadow: 0 10px 30px rgba(14,165,233,0.4); }
         .contact-icon { font-size: 1.2rem; }
         .contact-info { margin-top: 2rem; color: var(--text-dim); font-size: 0.9rem; }
 
         /* Footer */
-        footer {
-            padding: 2rem 5%; text-align: center;
-            border-top: 1px solid var(--border);
-            color: var(--text-dim); background: var(--bg-darker);
-            position: relative; z-index: 5; font-size: 0.85rem;
-        }
+        footer { padding: 2rem 5%; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); background: var(--bg-darker); position: relative; z-index: 5; font-size: 0.85rem; }
 
         /* Reveal Animations */
-        .reveal {
-            opacity: 0; transform: translateY(40px); 
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .code-block {
-            background: rgba(0,0,0,0.4); padding: 0.2rem 0.6rem;
-            border-radius: 4px; font-family: 'Space Mono', monospace;
-            color: var(--primary); border: 1px solid rgba(14,165,233,0.2);
-            font-size: 0.9em;
-        }
+        .code-block { background: rgba(0,0,0,0.4); padding: 0.2rem 0.6rem; border-radius: 4px; font-family: 'Space Mono', monospace; color: var(--primary); border: 1px solid rgba(14,165,233,0.2); font-size: 0.9em; }
 
         /* ===== RESPONSIVE MEDIA QUERIES ===== */
         @media (max-width: 768px) {
-            nav { padding: 1rem 5%; }
-            .logo { font-size: 1.5rem; }
-            .nav-links { gap: 1.5rem; }
-            .nav-links a { font-size: 0.75rem; letter-spacing: 0.5px; }
-            section { padding: 4rem 5%; }
-            .profile-img-container { width: 120px; height: 120px; margin-bottom: 1.5rem; margin-top: 2rem; /* Adjusted for tablets */ }
-            .floating-element { display: none; }
+            nav { padding: 1rem 5%; } .logo { font-size: 1.5rem; } .nav-links { gap: 1.5rem; } .nav-links a { font-size: 0.75rem; letter-spacing: 0.5px; } section { padding: 4rem 5%; } .profile-img-container { width: 120px; height: 120px; margin-bottom: 1.5rem; margin-top: 2rem; } .floating-element { display: none; }
+            .edu-ach-grid { grid-template-columns: 1fr; }
         }
-
         @media (max-width: 480px) {
-            nav { flex-direction: column; gap: 0.75rem; padding: 0.75rem 5%; }
-            .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
-            .hero { padding: 7rem 1.5rem 3rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .hero-description { font-size: 0.85rem; }
-            .cta-buttons { flex-direction: column; width: 100%; }
-            .btn { width: 100%; text-align: center; display: block; }
-            section { padding: 3rem 1.5rem; }
-            .section-title { font-size: 1.5rem; }
-            .skill-row { padding: 1rem; }
-            .timeline { padding-left: 1.5rem; }
-            .timeline-item::before { left: -1.9rem; width: 10px; height: 10px; }
-            .project-card { padding: 1.25rem; }
-            .contact-links { gap: 0.75rem; }
-            .contact-link { padding: 0.9rem 1.5rem; font-size: 0.9rem; }
-            .profile-img-container { margin-top: 1.5rem; /* Adjusted for mobile */ }
+            nav { flex-direction: column; gap: 0.75rem; padding: 0.75rem 5%; } .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; } .hero { padding: 7rem 1.5rem 3rem; } .hero-subtitle { font-size: 1.1rem; } .hero-description { font-size: 0.85rem; } .cta-buttons { flex-direction: column; width: 100%; } .btn { width: 100%; text-align: center; display: block; } section { padding: 3rem 1.5rem; } .section-title { font-size: 1.5rem; } .skill-row { padding: 1rem; } .timeline { padding-left: 1.5rem; } .timeline-item::before { left: -1.9rem; width: 10px; height: 10px; } .project-card { padding: 1.25rem; } .contact-links { gap: 0.75rem; } .contact-link { padding: 0.9rem 1.5rem; font-size: 0.9rem; } .profile-img-container { margin-top: 1.5rem; }
         }
-
-        @media (max-width: 360px) {
-            .nav-links { gap: 0.5rem; font-size: 0.7rem; }
-            .profile-img-container { width: 100px; height: 100px; }
-        }
+        @media (max-width: 360px) { .nav-links { gap: 0.5rem; font-size: 0.7rem; } .profile-img-container { width: 100px; height: 100px; } }
     </style>
 </head>
 <body>
@@ -468,16 +411,15 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <!-- Removed Go and 0x, kept only symbol brackets -->
         <div class="floating-element float-1">{ }</div>
         <div class="floating-element float-2">[ ]</div>
         <div class="floating-element float-3">&lt;/&gt;</div>
-        <div class="floating-element float-4">Go</div>
-        <div class="floating-element float-5">0x</div>
 
         <div class="container hero-content">
             <!-- PROFILE IMAGE -->
             <div class="profile-img-container">
-                <img src="https://picsum.photos/seed/johngoprofile/300/300.jpg" alt="John Githiyon E" class="profile-img" id="profile-img">
+                <img src="https://z-cdn-media.chatglm.cn/files/8c691447-f57a-477c-b3fe-bdcafa630838.jpeg?auth_key=1880669937-8daaed49a2164348868fdc9d683e40ba-0-330032d4c36644ee668424b9988612a5" alt="John Githiyon E" class="profile-img" id="profile-img">
             </div>
             
             <h1 class="hero-title">
@@ -490,7 +432,8 @@
                 From REST APIs to gRPC services — crafting efficient code that powers real-world applications.
             </p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">VIEW PROJECTS</a>
+                <a href="#projects" class="btn btn-secondary">VIEW PROJECTS</a>
+                <a href="#" onclick="downloadResume()" class="btn btn-secondary">DOWNLOAD RESUME</a>
                 <a href="#contact" class="btn btn-secondary">GET IN TOUCH</a>
             </div>
         </div>
@@ -506,39 +449,27 @@
             <div class="skills-vertical">
                 <div class="skill-row reveal">
                     <div class="skill-row-header"><span class="skill-icon">⚡</span><h3 class="skill-name">Languages</h3></div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Go (Golang)</span><span class="skill-tag">Python</span><span class="skill-tag">PHP</span><span class="skill-tag">JavaScript</span><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span>
-                    </div>
+                    <div class="skill-tags"><span class="skill-tag">Go (Golang)</span><span class="skill-tag">Python</span><span class="skill-tag">PHP</span><span class="skill-tag">JavaScript</span><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span></div>
                 </div>
                 <div class="skill-row reveal">
                     <div class="skill-row-header"><span class="skill-icon">🛠️</span><h3 class="skill-name">Frameworks</h3></div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Gin</span><span class="skill-tag">Express</span><span class="skill-tag">ReactJS</span><span class="skill-tag">Bootstrap</span><span class="skill-tag">Tailwind CSS</span>
-                    </div>
+                    <div class="skill-tags"><span class="skill-tag">Gin</span><span class="skill-tag">Express</span><span class="skill-tag">ReactJS</span><span class="skill-tag">Bootstrap</span><span class="skill-tag">Tailwind CSS</span></div>
                 </div>
                 <div class="skill-row reveal">
                     <div class="skill-row-header"><span class="skill-icon">🗄️</span><h3 class="skill-name">Databases & Storage</h3></div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Redis</span><span class="skill-tag">MinIO</span>
-                    </div>
+                    <div class="skill-tags"><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Redis</span><span class="skill-tag">MinIO</span></div>
                 </div>
                 <div class="skill-row reveal">
                     <div class="skill-row-header"><span class="skill-icon">☁️</span><h3 class="skill-name">Cloud & DevOps</h3></div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS</span><span class="skill-tag">Cloudflare</span><span class="skill-tag">Docker</span><span class="skill-tag">LXC</span><span class="skill-tag">Kubernetes</span>
-                    </div>
+                    <div class="skill-tags"><span class="skill-tag">AWS</span><span class="skill-tag">Cloudflare</span><span class="skill-tag">Docker</span><span class="skill-tag">LXC</span><span class="skill-tag">Kubernetes</span></div>
                 </div>
                 <div class="skill-row reveal">
                     <div class="skill-row-header"><span class="skill-icon">🔗</span><h3 class="skill-name">API & Architecture</h3></div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">REST API</span><span class="skill-tag">gRPC</span><span class="skill-tag">Monolithic</span><span class="skill-tag">Microservices</span>
-                    </div>
+                    <div class="skill-tags"><span class="skill-tag">REST API</span><span class="skill-tag">gRPC</span><span class="skill-tag">Monolithic</span><span class="skill-tag">Microservices</span></div>
                 </div>
                 <div class="skill-row reveal">
                     <div class="skill-row-header"><span class="skill-icon">📋</span><h3 class="skill-name">Version Control</h3></div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">GitLab</span>
-                    </div>
+                    <div class="skill-tags"><span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">GitLab</span></div>
                 </div>
             </div>
         </div>
@@ -574,7 +505,7 @@
         </div>
     </section>
 
-    <!-- Projects Section - No Numbers -->
+    <!-- Projects Section -->
     <section id="projects">
         <div class="container">
             <div class="section-header reveal">
@@ -583,25 +514,19 @@
             </div>
             <div class="projects-container">
                 <div class="project-card reveal">
-                    <div class="project-top">
-                        <h3 class="project-title">Nodefy</h3>
-                        <span class="project-badge">ONGOING</span>
-                    </div>
+                    <div class="project-top"><h3 class="project-title">Nodefy</h3><span class="project-badge">ONGOING</span></div>
                     <p class="project-description">An open-source cloud learning platform that helps students learn Linux, cloud infrastructure, application deployment, and multi-node environments through hands-on practice and GitHub-based deployments.</p>
                     <div class="project-tech"><span class="tech-tag">GO</span><span class="tech-tag">DOCKER</span><span class="tech-tag">KUBERNETES</span><span class="tech-tag">POSTGRESQL</span><span class="tech-tag">REDIS</span><span class="tech-tag">LXC</span></div>
                 </div>
                 <div class="project-card reveal">
-                    <div class="project-top">
-                        <h3 class="project-title">Kamaraj LMS</h3>
-                        <span class="project-badge">CONTRIBUTED</span>
-                    </div>
+                    <div class="project-top"><h3 class="project-title">Kamaraj LMS</h3><span class="project-badge">CONTRIBUTED</span></div>
                     <p class="project-description">An enterprise-grade online learning platform where instructors upload courses and students watch videos, track progress, and generate completion certificates. Built with scalable media processing and efficient content delivery.</p>
                     <div class="project-tech"><span class="tech-tag">GO</span><span class="tech-tag">FFMPEG</span><span class="tech-tag">HLS</span><span class="tech-tag">RABBITMQ</span><span class="tech-tag">MINIO</span><span class="tech-tag">POSTGRESQL</span></div>
                 </div>
                 <div class="project-card reveal">
                     <div class="project-top"><h3 class="project-title">DeskAssist</h3></div>
                     <p class="project-description">A lightweight Linux desktop assistant built with Go that enables users to open files, launch applications, and search the web using natural language commands — simplifying everyday desktop tasks with conversational interaction.</p>
-                    <div class="project-tech"><span class="tech-tag">GO</span><span class="tech-tag">NLP</span><span class="skill-tag">LINUX</span><span class="tech-tag">CLI</span></div>
+                    <div class="project-tech"><span class="tech-tag">GO</span><span class="tech-tag">NLP</span><span class="tech-tag">LINUX</span><span class="tech-tag">CLI</span></div>
                 </div>
                 <div class="project-card reveal">
                     <div class="project-top"><h3 class="project-title">Jwitch</h3></div>
@@ -622,13 +547,7 @@
             <div class="edu-ach-grid">
                 <div class="edu-card reveal">
                     <h3 class="edu-title">🎓 Education</h3>
-                    <div class="edu-detail">
-                        <strong>Bachelor of Engineering (B.E)</strong><br>
-                        Computer Science and Engineering<br>
-                        CGPA: <strong>8.09</strong><br><br>
-                        Class XII: <strong>85%</strong> (PCM & Bio)<br>
-                        Class X: <strong>Pass</strong>
-                    </div>
+                    <div class="edu-detail"><strong>Bachelor of Engineering (B.E)</strong><br>Computer Science and Engineering<br>CGPA: <strong>8.09</strong><br><br>Class XII: <strong>85%</strong> (PCM & Bio)<br>Class X: <strong>Pass</strong></div>
                 </div>
                 <div class="edu-card reveal">
                     <h3 class="edu-title">🏆 Achievements</h3>
@@ -668,47 +587,34 @@
         let ctx = canvas.getContext('2d');
         let w, h, columns = [];
         const fontSize = 24; 
-        const chars = ['0','1']; // Specifically 0 and 1
+        const chars = ['0','1']; 
 
         function initCanvas() {
             w = window.innerWidth; h = window.innerHeight;
             canvas.width = w; canvas.height = h;
             const colCount = Math.floor(w / fontSize);
             columns = [];
-            for (let i = 0; i < colCount; i++) {
-                columns[i] = Math.floor(Math.random() * h / fontSize);
-            }
+            for (let i = 0; i < colCount; i++) { columns[i] = Math.floor(Math.random() * h / fontSize); }
         }
 
         function drawBinary() {
-            // Very slow fade creates long, bright, visible trails of 0s and 1s
             ctx.fillStyle = 'rgba(2, 6, 23, 0.05)'; 
             ctx.fillRect(0, 0, w, h);
-            
             ctx.font = `bold ${fontSize}px 'Space Mono', monospace`;
             ctx.textAlign = 'center';
-            
             for (let i = 0; i < columns.length; i++) {
                 const char = chars[Math.floor(Math.random() * chars.length)];
                 const x = i * fontSize + fontSize / 2;
                 const y = columns[i] * fontSize;
-                
-                // Glowing bright white/cyan for maximum visibility of the 0s and 1s
                 ctx.shadowBlur = 20;
                 ctx.shadowColor = 'rgba(14, 165, 233, 0.8)';
                 ctx.fillStyle = `rgba(220, 255, 255, 0.95)`; 
                 ctx.fillText(char, x, y);
-
-                if (y > h && Math.random() > 0.975) {
-                    columns[i] = 0;
-                } else {
-                    columns[i]++;
-                }
+                if (y > h && Math.random() > 0.975) { columns[i] = 0; } else { columns[i]++; }
             }
             ctx.shadowBlur = 0;
             requestAnimationFrame(drawBinary);
         }
-
         window.addEventListener('resize', initCanvas);
         initCanvas();
         drawBinary();
@@ -716,59 +622,98 @@
         // ========== TYPEWRITER EFFECT ==========
         const typewriterElement = document.getElementById('typewriter');
         const titles = ['Go Backend Developer', 'Cloud Enthusiast', 'Microservices Architect', 'Open Source Contributor'];
-        let titleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
+        let titleIndex = 0, charIndex = 0, isDeleting = false;
         function typeWriter() {
             const currentTitle = titles[titleIndex];
-            
-            if (isDeleting) {
-                typewriterElement.textContent = currentTitle.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typewriterElement.textContent = currentTitle.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
+            if (isDeleting) { typewriterElement.textContent = currentTitle.substring(0, charIndex - 1); charIndex--; } 
+            else { typewriterElement.textContent = currentTitle.substring(0, charIndex + 1); charIndex++; }
             let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentTitle.length) {
-                typeSpeed = 2000; // Pause at end
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                titleIndex = (titleIndex + 1) % titles.length;
-                typeSpeed = 500; // Pause before new word
-            }
-
+            if (!isDeleting && charIndex === currentTitle.length) { typeSpeed = 2000; isDeleting = true; } 
+            else if (isDeleting && charIndex === 0) { isDeleting = false; titleIndex = (titleIndex + 1) % titles.length; typeSpeed = 500; }
             setTimeout(typeWriter, typeSpeed);
         }
-        
         setTimeout(typeWriter, 1500);
+
+        // ========== RESUME DOWNLOAD FUNCTION ==========
+        function downloadResume() {
+            const resumeText = `John Githiyon E
+johngithiyon7@gmail.com
+
++91 9342537200 
+https://www.linkedin.com/in/john-githiyon-e-59ba392b4/
+https://github.com/johngithiyon
+
+Professional Experience
+
+Backend Developer — Nodefy 1st March 2026 – 31th March 2026
+• Nodefy is a open source cloud platform that helps students to learn about cloud infrastructures. Specialized with Backend system using Go, virtualization, queuing system, Databases management, Container management, and Tunneling .
+
+Backend Developer — Kamaraj Learning Management System 15th December 2025 – 3rd February 2026
+• Specialized in building scalable backend systems using Go, PostgreSQL, Docker, RabbitMQ, Redis, MinIO, and FFmpeg for high-performance application development and media processing.
+
+AI & Machine Learning Intern — Paruvathey Payir Sei 5th September 2025 – 30rd November 2025
+• Worked on data preprocessing, analysis, and basic machine learning models using Python. Gained exposure to supervised learning, model training, and evaluation while contributing to real-world AI problem-solving projects.
+
+Projects
+Nodefy (Ongoing)
+• Nodefy is an open-source cloud learning platform that helps students learn Linux, cloud infrastructure, application deployment, and multi-node environments through hands-on practice and GitHub-based deployments.
+
+Kamaraj Learning Management System (Contributed)
+• KLMS is an online learning platform where instructors upload courses and students watch videos, track progress, and generate completion certificates.
+
+Desk Assistant
+• DeskAssist is a lightweight Linux desktop assistant built with Go that enables users to open files, launch applications, and search the web using natural language commands, simplifying everyday desktop tasks.
+
+Jwitch
+• Jwitch is a Twitch-inspired live-streaming platform that enables real-time content broadcasting, viewer interaction, and seamless video streaming for creators and audiences.
+
+Skills
+• Languages: Go, PHP, Python, HTML, CSS, JavaScript
+• Frameworks: Gin, Express, ReactJS, Bootstrap, Tailwind
+• Cloud Services: AWS, Cloudflare
+• API Development: Rest API, Grpc
+• System Design: Monolithic, Microservices
+• Database: PostgreSQL, Mysql, MongoDB, Redis
+• Object Storage: Minio
+• Containerization: Docker, LXC, Kubernetes
+• Version Control: Git, GitHub, GitLab
+
+Education
+• Bachelor of Engineering (B.E) in Computer Science and Engineering
+• CGPA: 8.09
+• Class XII: 85% (PCM & Bio) | Class X: Pass
+
+Achievements
+• FossHack 2026 – Won ₹25000 for open source project contribution
+• Nebula nest’24 Hackathon (24 hours) – Won Second Price at M.Kumarasamy college,Karur
+• Project Expo – Won First Price at Anna University Regional Campus Madurai & Won Second Price at Kamaraj college of Engineering and Technology
+• Codeathon (24 hours)– Won Third Price at Prathyusha college of Engineering and Technology`;
+
+            const blob = new Blob([resumeText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'John_Githiyon_Resume.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
 
         // ========== SCROLL PROGRESS ==========
         const scrollProgress = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
             const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (scrollHeight > 0) {
-                scrollProgress.style.transform = `scaleX(${window.scrollY / scrollHeight})`;
-            }
+            if (scrollHeight > 0) { scrollProgress.style.transform = `scaleX(${window.scrollY / scrollHeight})`; }
         });
 
         // ========== SCROLL REVEALS ==========
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    if(entry.target.classList.contains('section-header')) {
-                        entry.target.classList.add('revealed');
-                    }
-                }
+                if (entry.isIntersecting) { entry.target.classList.add('active'); if(entry.target.classList.contains('section-header')) { entry.target.classList.add('revealed'); } }
             });
         }, { threshold: 0.1 });
-
         reveals.forEach(el => observer.observe(el));
 
         // ========== SMOOTH NAV ==========
@@ -776,9 +721,7 @@
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
-                }
+                if (target) { window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' }); }
             });
         });
     </script>
