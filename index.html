@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>John Githiyon E · Go Backend Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- jsPDF Library for PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -29,7 +31,7 @@
             line-height: 1.6;
         }
 
-        /* Binary Rain Canvas - Ultra Visible 0s and 1s */
+        /* Binary Rain Canvas */
         #binary-canvas {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -99,7 +101,7 @@
             padding: 8rem 5% 4rem; 
         }
         
-        /* Floating symbols - Kept only { }, [ ], </> */
+        /* Floating symbols */
         .floating-element {
             position: absolute; font-size: 2rem; opacity: 0.15;
             animation: float 6s ease-in-out infinite;
@@ -121,7 +123,7 @@
             display: flex; flex-direction: column; align-items: center;
         }
         
-        /* Profile Image - Single Color Border */
+        /* Profile Image */
         .profile-img-container {
             width: 160px; height: 160px;
             margin-top: 3rem; 
@@ -137,7 +139,7 @@
         .profile-img {
             width: 100%; height: 100%; border-radius: 50%; 
             object-fit: cover;
-            object-position: center 15%; /* Adjusts image to center face/upper body perfectly */
+            object-position: center 15%; 
             border: 4px solid #020617; display: block;
         }
 
@@ -313,12 +315,8 @@
             color: var(--primary); font-weight: 700; letter-spacing: 0.5px;
         }
 
-        /* Education & Achievements - Grid Cards */
-        .edu-ach-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; /* Side-by-side cards */
-            gap: 2rem; 
-        }
+        /* Education & Achievements */
+        .edu-ach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .edu-card {
             background: var(--bg-card); padding: 2rem;
             border: 1px solid var(--border); border-left: 4px solid var(--primary);
@@ -411,7 +409,6 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <!-- Removed Go and 0x, kept only symbol brackets -->
         <div class="floating-element float-1">{ }</div>
         <div class="floating-element float-2">[ ]</div>
         <div class="floating-element float-3">&lt;/&gt;</div>
@@ -433,7 +430,7 @@
             </p>
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-secondary">VIEW PROJECTS</a>
-                <a href="#" onclick="downloadResume()" class="btn btn-secondary">DOWNLOAD RESUME</a>
+                <button onclick="downloadResume()" class="btn btn-secondary">DOWNLOAD RESUME</button>
                 <a href="#contact" class="btn btn-secondary">GET IN TOUCH</a>
             </div>
         </div>
@@ -582,7 +579,7 @@
     <footer><p>&copy; 2026 John Githiyon E. Crafted with passion.</p></footer>
 
     <script>
-        // ========== ULTRA VISIBLE BINARY RAIN (0 and 1) ==========
+        // ========== BINARY RAIN ==========
         const canvas = document.getElementById('binary-canvas');
         let ctx = canvas.getContext('2d');
         let w, h, columns = [];
@@ -634,70 +631,97 @@
         }
         setTimeout(typeWriter, 1500);
 
-        // ========== RESUME DOWNLOAD FUNCTION ==========
+        // ========== PDF RESUME DOWNLOAD FUNCTION ==========
         function downloadResume() {
-            const resumeText = `John Githiyon E
-johngithiyon7@gmail.com
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 15;
+            const usableWidth = pageWidth - margin * 2;
+            let y = 20;
+            const lineHeight = 6;
+            
+            // Helper function to add text and handle page breaks
+            function addText(text, size, style, color, spacing) {
+                doc.setFontSize(size);
+                doc.setFont("helvetica", style || "normal");
+                if (color) doc.setTextColor(color[0], color[1], color[2]);
+                else doc.setTextColor(40, 40, 40);
+                
+                const lines = doc.splitTextToSize(text, usableWidth);
+                for (let i = 0; i < lines.length; i++) {
+                    if (y > 275) { 
+                        doc.addPage(); 
+                        y = 20; 
+                    }
+                    doc.text(lines[i], margin, y);
+                    y += lineHeight;
+                }
+                if (spacing) y += spacing;
+            }
 
-+91 9342537200 
-https://www.linkedin.com/in/john-githiyon-e-59ba392b4/
-https://github.com/johngithiyon
+            // --- HEADER ---
+            addText("John Githiyon E", 22, "bold", [14, 165, 233], 2);
+            addText("johngithiyon7@gmail.com | +91 9342537200", 10, "normal", [80, 80, 80], 1);
+            addText("LinkedIn: linkedin.com/in/john-githiyon-e-59ba392b4/", 10, "normal", [80, 80, 80], 1);
+            addText("GitHub: github.com/johngithiyon", 10, "normal", [80, 80, 80], 6);
 
-Professional Experience
+            // --- PROFESSIONAL EXPERIENCE ---
+            addText("PROFESSIONAL EXPERIENCE", 14, "bold", [14, 165, 233], 2);
+            
+            addText("Backend Developer — Nodefy", 11, "bold", [40, 40, 40], 1);
+            addText("1st March 2026 – 31th March 2026", 9, "italic", [100, 100, 100], 1);
+            addText("• Nodefy is a open source cloud platform that helps students to learn about cloud infrastructures. Specialized with Backend system using Go, virtualization, queuing system, Databases management, Container management, and Tunneling.", 10, "normal", null, 4);
+            
+            addText("Backend Developer — Kamaraj Learning Management System", 11, "bold", [40, 40, 40], 1);
+            addText("15th December 2025 – 3rd February 2026", 9, "italic", [100, 100, 100], 1);
+            addText("• Specialized in building scalable backend systems using Go, PostgreSQL, Docker, RabbitMQ, Redis, MinIO, and FFmpeg for high-performance application development and media processing.", 10, "normal", null, 4);
 
-Backend Developer — Nodefy 1st March 2026 – 31th March 2026
-• Nodefy is a open source cloud platform that helps students to learn about cloud infrastructures. Specialized with Backend system using Go, virtualization, queuing system, Databases management, Container management, and Tunneling .
+            addText("AI & Machine Learning Intern — Paruvathey Payir Sei", 11, "bold", [40, 40, 40], 1);
+            addText("5th September 2025 – 30rd November 2025", 9, "italic", [100, 100, 100], 1);
+            addText("• Worked on data preprocessing, analysis, and basic machine learning models using Python. Gained exposure to supervised learning, model training, and evaluation while contributing to real-world AI problem-solving projects.", 10, "normal", null, 6);
 
-Backend Developer — Kamaraj Learning Management System 15th December 2025 – 3rd February 2026
-• Specialized in building scalable backend systems using Go, PostgreSQL, Docker, RabbitMQ, Redis, MinIO, and FFmpeg for high-performance application development and media processing.
+            // --- PROJECTS ---
+            addText("PROJECTS", 14, "bold", [14, 165, 233], 2);
 
-AI & Machine Learning Intern — Paruvathey Payir Sei 5th September 2025 – 30rd November 2025
-• Worked on data preprocessing, analysis, and basic machine learning models using Python. Gained exposure to supervised learning, model training, and evaluation while contributing to real-world AI problem-solving projects.
+            addText("Nodefy (Ongoing)", 11, "bold", [40, 40, 40], 1);
+            addText("• Nodefy is an open-source cloud learning platform that helps students learn Linux, cloud infrastructure, application deployment, and multi-node environments through hands-on practice and GitHub-based deployments.", 10, "normal", null, 3);
 
-Projects
-Nodefy (Ongoing)
-• Nodefy is an open-source cloud learning platform that helps students learn Linux, cloud infrastructure, application deployment, and multi-node environments through hands-on practice and GitHub-based deployments.
+            addText("Kamaraj Learning Management System (Contributed)", 11, "bold", [40, 40, 40], 1);
+            addText("• KLMS is an online learning platform where instructors upload courses and students watch videos, track progress, and generate completion certificates.", 10, "normal", null, 3);
 
-Kamaraj Learning Management System (Contributed)
-• KLMS is an online learning platform where instructors upload courses and students watch videos, track progress, and generate completion certificates.
+            addText("Desk Assistant", 11, "bold", [40, 40, 40], 1);
+            addText("• DeskAssist is a lightweight Linux desktop assistant built with Go that enables users to open files, launch applications, and search the web using natural language commands, simplifying everyday desktop tasks.", 10, "normal", null, 3);
 
-Desk Assistant
-• DeskAssist is a lightweight Linux desktop assistant built with Go that enables users to open files, launch applications, and search the web using natural language commands, simplifying everyday desktop tasks.
+            addText("Jwitch", 11, "bold", [40, 40, 40], 1);
+            addText("• Jwitch is a Twitch-inspired live-streaming platform that enables real-time content broadcasting, viewer interaction, and seamless video streaming for creators and audiences.", 10, "normal", null, 6);
 
-Jwitch
-• Jwitch is a Twitch-inspired live-streaming platform that enables real-time content broadcasting, viewer interaction, and seamless video streaming for creators and audiences.
+            // --- SKILLS ---
+            addText("SKILLS", 14, "bold", [14, 165, 233], 2);
+            addText("• Languages: Go, PHP, Python, HTML, CSS, JavaScript", 10, "normal", null, 1);
+            addText("• Frameworks: Gin, Express, ReactJS, Bootstrap, Tailwind", 10, "normal", null, 1);
+            addText("• Cloud Services: AWS, Cloudflare", 10, "normal", null, 1);
+            addText("• API Development: Rest API, Grpc", 10, "normal", null, 1);
+            addText("• System Design: Monolithic, Microservices", 10, "normal", null, 1);
+            addText("• Database: PostgreSQL, Mysql, MongoDB, Redis", 10, "normal", null, 1);
+            addText("• Object Storage: Minio", 10, "normal", null, 1);
+            addText("• Containerization: Docker, LXC, Kubernetes", 10, "normal", null, 1);
+            addText("• Version Control: Git, GitHub, GitLab", 10, "normal", null, 6);
 
-Skills
-• Languages: Go, PHP, Python, HTML, CSS, JavaScript
-• Frameworks: Gin, Express, ReactJS, Bootstrap, Tailwind
-• Cloud Services: AWS, Cloudflare
-• API Development: Rest API, Grpc
-• System Design: Monolithic, Microservices
-• Database: PostgreSQL, Mysql, MongoDB, Redis
-• Object Storage: Minio
-• Containerization: Docker, LXC, Kubernetes
-• Version Control: Git, GitHub, GitLab
+            // --- EDUCATION ---
+            addText("EDUCATION", 14, "bold", [14, 165, 233], 2);
+            addText("Bachelor of Engineering (B.E) in Computer Science and Engineering", 11, "bold", [40, 40, 40], 1);
+            addText("CGPA: 8.09 | Class XII: 85% (PCM & Bio) | Class X: Pass", 10, "normal", null, 6);
 
-Education
-• Bachelor of Engineering (B.E) in Computer Science and Engineering
-• CGPA: 8.09
-• Class XII: 85% (PCM & Bio) | Class X: Pass
+            // --- ACHIEVEMENTS ---
+            addText("ACHIEVEMENTS", 14, "bold", [14, 165, 233], 2);
+            addText("• FossHack 2026 – Won ₹25000 for open source project contribution", 10, "normal", null, 1);
+            addText("• Nebula nest'24 Hackathon (24 hours) – Won Second Price at M.Kumarasamy college,Karur", 10, "normal", null, 1);
+            addText("• Project Expo – Won First Price at Anna University Regional Campus Madurai & Won Second Price at Kamaraj college of Engineering and Technology", 10, "normal", null, 1);
+            addText("• Codeathon (24 hours)– Won Third Price at Prathyusha college of Engineering and Technology", 10, "normal", null, 0);
 
-Achievements
-• FossHack 2026 – Won ₹25000 for open source project contribution
-• Nebula nest’24 Hackathon (24 hours) – Won Second Price at M.Kumarasamy college,Karur
-• Project Expo – Won First Price at Anna University Regional Campus Madurai & Won Second Price at Kamaraj college of Engineering and Technology
-• Codeathon (24 hours)– Won Third Price at Prathyusha college of Engineering and Technology`;
-
-            const blob = new Blob([resumeText], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'John_Githiyon_Resume.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            doc.save("John_Githiyon_Resume.pdf");
         }
 
         // ========== SCROLL PROGRESS ==========
