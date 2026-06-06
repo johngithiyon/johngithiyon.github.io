@@ -382,7 +382,15 @@
             .edu-ach-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
-            nav { flex-direction: column; gap: 0.75rem; padding: 0.75rem 5%; } .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; } .hero { padding: 7rem 1.5rem 3rem; } .hero-subtitle { font-size: 1.1rem; } .hero-description { font-size: 0.85rem; } .cta-buttons { flex-direction: column; width: 100%; } .btn { width: 100%; text-align: center; display: block; } section { padding: 3rem 1.5rem; } .section-title { font-size: 1.5rem; } .skill-row { padding: 1rem; } .timeline { padding-left: 1.5rem; } .timeline-item::before { left: -1.9rem; width: 10px; height: 10px; } .project-card { padding: 1.25rem; } .contact-links { gap: 0.75rem; } .contact-link { padding: 0.9rem 1.5rem; font-size: 0.9rem; } .profile-img-container { margin-top: 1.5rem; }
+            /* Nav wraps to 3 rows on mobile — keep it compact */
+            nav { flex-direction: column; gap: 0.5rem; padding: 0.6rem 5%; }
+            .nav-links { gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
+            .nav-links a { font-size: 0.72rem; letter-spacing: 0.3px; }
+            /* Hero needs enough top padding to clear the taller wrapped nav (~110px) */
+            .hero { padding: 9rem 1.5rem 3rem; }
+            /* Profile image: extra top margin so it sits well below the nav */
+            .profile-img-container { width: 110px; height: 110px; margin-top: 2.5rem; margin-bottom: 1.5rem; }
+            .hero-subtitle { font-size: 1.1rem; } .hero-description { font-size: 0.85rem; } .cta-buttons { flex-direction: column; width: 100%; } .btn { width: 100%; text-align: center; display: block; } section { padding: 3rem 1.5rem; } .section-title { font-size: 1.5rem; } .skill-row { padding: 1rem; } .timeline { padding-left: 1.5rem; } .timeline-item::before { left: -1.9rem; width: 10px; height: 10px; } .project-card { padding: 1.25rem; } .contact-links { gap: 0.75rem; } .contact-link { padding: 0.9rem 1.5rem; font-size: 0.9rem; }
         }
         @media (max-width: 360px) { .nav-links { gap: 0.5rem; font-size: 0.7rem; } .profile-img-container { width: 100px; height: 100px; } }
     </style>
